@@ -5,6 +5,7 @@ class Card extends Component {
         super(props);
         this.folder = this.props.folder;
         this.name = this.props.name;
+        this.handleClick = this.props.handleClick;
         this.state = {
             faceup: false,
             clickable: true,
@@ -34,7 +35,7 @@ class Card extends Component {
     }
 
     onClick() {
-        this.faceUp();
+        this.handleClick(this);
     }
 
     render() {

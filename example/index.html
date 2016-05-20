@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="assets/js/vendor/jquery-1.12.1.min.js"></script>
+    <script src="assets/js/memory.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="assets/css/memory.css">
+    <style>
+        #game {
+            width: 80%;
+            height: 100%;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+
+<div id="game"></div>
+
+<script>
+    var cards = [
+        {
+            folder: 'yoona',
+            name: '1.jpg'
+        },
+        {
+            folder: 'yoona',
+            name: '2.jpg'
+        },
+        {
+            folder: 'yoona',
+            name: '3.jpg'
+        },
+        {
+            folder: 'yoona',
+            name: '4.jpg'
+        },
+        {
+            folder: 'yoona',
+            name: '5.jpg'
+        },
+        {
+            folder: 'yoona',
+            name: '6.jpg'
+        },
+        {
+            folder: 'yoona',
+            name: '1.jpg'
+        },
+        {
+            folder: 'yoona',
+            name: '2.jpg'
+        },
+        {
+            folder: 'yoona',
+            name: '3.jpg'
+        },
+        {
+            folder: 'yoona',
+            name: '4.jpg'
+        },
+        {
+            folder: 'yoona',
+            name: '5.jpg'
+        },
+        {
+            folder: 'yoona',
+            name: '6.jpg'
+        }
+    ];
+    var config = {
+        imgPath: 'assets/images'
+    };
+    var game = new Game(cards, config);
+    game.render(document.getElementById('game'));
+</script>
+
+</body>
+</html>

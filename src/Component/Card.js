@@ -46,7 +46,7 @@ class Card extends Component {
         return (
             <div className={ flipClass } onClick={ this.onClick.bind(this) }>
                 <div className="face back">
-                    <img className="shadow" src="assets/images/back.jpg" />
+                    <img className="shadow" src="/assets/images/back.jpg" />
                 </div>
                 <div className="face front">
                     <img className="flipped-shadow" src={ src } />

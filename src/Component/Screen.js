@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import ArrayShuffle from 'array-shuffle';
 import Card from './Card.js';
-import Log from '../Log.js';
 
 class Screen extends Component {
     constructor(props) {
         super(props);
-        this.log = new Log();
+        this.log = this.props.log;
         this.cards = ArrayShuffle(this.props.cards);
         this.cfg = this.props.cfg;
         this.finish = this.props.finish;
@@ -39,7 +38,7 @@ class Screen extends Component {
         this.log.record({
             event: 'start',
             folder: this.cfg.folder,
-            time: this.startTime
+            timestamp: this.startTime
         });
     }
 
@@ -54,7 +53,9 @@ class Screen extends Component {
         this.timer = null;
         this.log.record({
             event: 'end',
-            time: new Date().getTime()
+            timestamp: new Date().getTime(),
+            moves: (this.state.turn + 1),
+            time: this.state.time
         });
         if (this.finish.length > 0) this.finish.forEach(function(fn) {
             fn();
@@ -69,7 +70,7 @@ class Screen extends Component {
         this.log.record({
             no: card.no,
             name: card.name,
-            time: new Date().getTime()
+            timestamp: new Date().getTime()
         });
 
         card.faceUp();

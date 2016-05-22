@@ -3,8 +3,9 @@ import React, { Component } from 'react';
 class Card extends Component {
     constructor(props) {
         super(props);
-        this.folder = this.props.folder;
+        this.path = this.props.path;
         this.name = this.props.name;
+        this.no = this.props.no;
         this.handleClick = this.props.handleClick;
         this.state = {
             faceup: false,
@@ -40,7 +41,7 @@ class Card extends Component {
 
     render() {
         var flipClass = 'card' + (this.state.faceup ? ' flipped' : '');
-        var src = `${this.folder}/${this.name}`;
+        var src = `${this.path}/${this.name}`;
 
         return (
             <div className={ flipClass } onClick={ this.onClick.bind(this) }>

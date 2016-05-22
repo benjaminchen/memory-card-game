@@ -1,3 +1,16 @@
-/**
- * Created by benjamin on 2016/5/18.
- */
+class Log {
+    constructor() {
+        this.records = [];
+    }
+
+    record(obj) {
+        this.records.push(obj);
+        console.log(obj);
+    }
+
+    get() {
+        return this.records;
+    }
+}
+
+export default Log;

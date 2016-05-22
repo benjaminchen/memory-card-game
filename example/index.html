@@ -20,59 +20,27 @@
 
 <script>
     var cards = [
-        {
-            folder: 'yoona',
-            name: '1.jpg'
-        },
-        {
-            folder: 'yoona',
-            name: '2.jpg'
-        },
-        {
-            folder: 'yoona',
-            name: '3.jpg'
-        },
-        {
-            folder: 'yoona',
-            name: '4.jpg'
-        },
-        {
-            folder: 'yoona',
-            name: '5.jpg'
-        },
-        {
-            folder: 'yoona',
-            name: '6.jpg'
-        },
-        {
-            folder: 'yoona',
-            name: '1.jpg'
-        },
-        {
-            folder: 'yoona',
-            name: '2.jpg'
-        },
-        {
-            folder: 'yoona',
-            name: '3.jpg'
-        },
-        {
-            folder: 'yoona',
-            name: '4.jpg'
-        },
-        {
-            folder: 'yoona',
-            name: '5.jpg'
-        },
-        {
-            folder: 'yoona',
-            name: '6.jpg'
-        }
+        '1.jpg',
+        '2.jpg',
+        '3.jpg',
+        '4.jpg',
+        '5.jpg',
+        '6.jpg',
+        '1.jpg',
+        '2.jpg',
+        '3.jpg',
+        '4.jpg',
+        '5.jpg',
+        '6.jpg'
     ];
     var config = {
-        imgPath: 'assets/images'
+        imgPath: 'assets/images',
+        folder: 'yoona'
     };
     var game = new Game(cards, config);
+    game.onFinish(function() {
+        alert("恭喜");
+    });
     game.render(document.getElementById('game'));
 </script>
 

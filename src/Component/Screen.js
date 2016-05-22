@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import ArrayShuffle from 'array-shuffle';
 import Card from './Card.js';
+import Log from '../Log.js';
 
 class Screen extends Component {
     constructor(props) {
         super(props);
+        this.log = new Log();
         this.cards = ArrayShuffle(this.props.cards);
         this.cfg = this.props.cfg;
+        this.finish = this.props.finish;
         this.startTime = null;
         this.timer = null;
         this.state = {
@@ -33,6 +36,11 @@ class Screen extends Component {
         this.startTime = new Date().getTime();
 
         if (!this.timer) this.timer = setInterval(this.tick.bind(this), 500);
+        this.log.record({
+            event: 'start',
+            folder: this.cfg.folder,
+            time: this.startTime
+        });
     }
 
     tick() {
@@ -44,12 +52,25 @@ class Screen extends Component {
     stop() {
         clearInterval(this.timer);
         this.timer = null;
+        this.log.record({
+            event: 'end',
+            time: new Date().getTime()
+        });
+        if (this.finish.length > 0) this.finish.forEach(function(fn) {
+            fn();
+        });
     }
 
     handleClick(card) {
         var stopNo = this.cards.length / 2,
             correct;
         if (!this.state.clickable || !card.state.clickable) return;
+
+        this.log.record({
+            no: card.no,
+            name: card.name,
+            time: new Date().getTime()
+        });
 
         card.faceUp();
 
@@ -94,13 +115,14 @@ class Screen extends Component {
 
     render() {
         var imgPath = this.cfg.imgPath;
+        var folder = this.cfg.folder;
         var handleClick = this.handleClick.bind(this);
         var createCard = function (card, index) {
-            var folder = `${imgPath}/${card.folder}`;
+            var path = `${imgPath}/${folder}`;
 
             return (
                 <div key={ index } className="card_container">
-                    <Card name={ card.name } name={ card.name } folder={ folder } handleClick={ handleClick }/>
+                    <Card name={ card } path={ path } no={ index } handleClick={ handleClick } />
                 </div>
             );
         };

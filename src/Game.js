@@ -1,18 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Screen from './Component/Screen.js';
+import Routers from './Routers.js';
 import Log from './Log.js';
 
 class Game {
     constructor(cards, cfg) {
         this.cards = cards;
         this.cfg = cfg;
-        this.finish = [];
+        this.finishEvent = [];
         this.log = new Log();
     }
 
     onFinish(fn) {
-        this.finish.push(fn);
+        this.finishEvent.push(fn);
     }
 
     getData() {
@@ -28,9 +28,9 @@ class Game {
     render(dom) {
         var cards = this.cards;
         var cfg = this.cfg;
-        var finish = this.finish;
+        var finishEvent = this.finishEvent;
         var log = this.log;
-        var element = React.createElement(Screen, { cards, cfg, finish, log });
+        var element = React.createElement(Routers, { cards, cfg, finishEvent, log });
         var game = ReactDOM.render(element, dom);
     }
 }

@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import ArrayShuffle from 'array-shuffle';
-import Card from './Card.js';
+import Card from '../Component/Card.js';
 
-class Screen extends Component {
+class Main extends Component {
     constructor(props) {
         super(props);
-        this.log = this.props.log;
-        this.cards = ArrayShuffle(this.props.cards);
-        this.cfg = this.props.cfg;
-        this.finish = this.props.finish;
+        this.log = this.props.route.log;
+        this.cards = ArrayShuffle(this.props.route.cards);
+        this.cfg = this.props.route.cfg;
+        this.finishEvent = this.props.route.finishEvent;
         this.startTime = null;
         this.timer = null;
         this.state = {
@@ -38,6 +38,7 @@ class Screen extends Component {
         this.log.record({
             event: 'start',
             folder: this.cfg.folder,
+            cardsNum: this.cards.length,
             timestamp: this.startTime
         });
     }
@@ -57,7 +58,8 @@ class Screen extends Component {
             moves: (this.state.turn + 1),
             time: this.state.time
         });
-        if (this.finish.length > 0) this.finish.forEach(function(fn) {
+        var finishEvent = this.finishEvent;
+        if (finishEvent.length > 0) finishEvent.forEach(function(fn) {
             fn();
         });
     }
@@ -88,15 +90,17 @@ class Screen extends Component {
             clickable: false
         });
 
+        var backTime = this.cfg.backTime ? this.cfg.backTime * 1000 : 800;
+
         if (this.state.card.name !== card.name) {
-            setTimeout(card.faceDown.bind(card), 800);
-            setTimeout(this.state.card.faceDown.bind(this.state.card), 800);
+            setTimeout(card.faceDown.bind(card), backTime);
+            setTimeout(this.state.card.faceDown.bind(this.state.card), backTime);
             setTimeout(function () {
                 this.setState({
                     clickable: true,
                     wrong: this.state.wrong + 1
                 });
-            }.bind(this), 800);
+            }.bind(this), backTime);
         } else {
             correct = this.state.correct + 1;
             card.match();
@@ -119,11 +123,9 @@ class Screen extends Component {
         var folder = this.cfg.folder;
         var handleClick = this.handleClick.bind(this);
         var createCard = function (card, index) {
-            var path = `${imgPath}/${folder}`;
-
             return (
                 <div key={ index } className="card_container">
-                    <Card name={ card } path={ path } no={ index } handleClick={ handleClick } />
+                    <Card name={ card } imgPath={ imgPath } folder={ folder } no={ index } handleClick={ handleClick } />
                 </div>
             );
         };
@@ -142,4 +144,4 @@ class Screen extends Component {
     }
 }
 
-export default Screen;
+export default Main;

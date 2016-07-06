@@ -4,6 +4,7 @@ class Log {
     }
 
     record(obj) {
+        console.log(obj);
         this.records.push(obj);
     }
 

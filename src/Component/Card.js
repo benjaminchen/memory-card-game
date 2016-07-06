@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 class Card extends Component {
     constructor(props) {
         super(props);
-        this.path = this.props.path;
         this.name = this.props.name;
         this.no = this.props.no;
         this.handleClick = this.props.handleClick;
@@ -41,12 +40,12 @@ class Card extends Component {
 
     render() {
         var flipClass = 'card' + (this.state.faceup ? ' flipped' : '');
-        var src = `${this.path}/${this.name}`;
+        var src = `${this.props.imgPath}/${this.props.folder}/${this.name}`;
 
         return (
             <div className={ flipClass } onClick={ this.onClick.bind(this) }>
                 <div className="face back">
-                    <img className="shadow" src="/assets/images/back.jpg" />
+                    <img className="shadow" src={ this.props.imgPath + '/back.jpg' } />
                 </div>
                 <div className="face front">
                     <img className="flipped-shadow" src={ src } />

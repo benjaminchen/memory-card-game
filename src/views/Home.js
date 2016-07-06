@@ -5,7 +5,7 @@ class Home extends Component {
         return (
             <div>
                 <h2>Home</h2>
-                <form action="http://localhost/memory-card-game/example/#/main">
+                <form action="#/main">
                     <button type="submit">開始測驗</button>
                 </form>
 

@@ -7,7 +7,7 @@ module.exports = {
     ],
 
     output: {
-        path: path.resolve(__dirname, 'example/assets/js'),
+        path: path.resolve(__dirname, 'release'),
         filename: 'memory.min.js'
     },
 

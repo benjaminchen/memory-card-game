@@ -3,10 +3,10 @@ import React, { Component } from 'react';
 class Home extends Component {
     render() {
         return (
-            <div>
+            <div className="back">
                 <h2>Home</h2>
                 <form action="#/main">
-                    <button type="submit">開始測驗</button>
+                    <input src="assets/images/start-btn.png" type="image" />
                 </form>
 
                 {/* Render the child route component */}

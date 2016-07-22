@@ -56,3 +56,9 @@ body, html {
 .flipped {
     transform: rotateY(180deg);
 }
+
+.back {
+    width: 100%;
+    height: 100%;
+    background-image: url("../../assets/images/start-background.png");
+}

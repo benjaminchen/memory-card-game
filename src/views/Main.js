@@ -14,6 +14,7 @@ class Main extends Component {
         this.state = {
             clickable: false,
             card: null,
+            stop: true,
             time: 0,
             turn: 0,
             wrong: 0,
@@ -28,9 +29,19 @@ class Main extends Component {
         });
     }
 
+    componentDidUpdate() {
+        var finishEvent = this.finishEvent;
+        if (this.state.stop && finishEvent.length > 0) {
+            finishEvent.forEach(function(fn) {
+                fn();
+            });
+        }
+    }
+
     start() {
         this.setState({
-            time: 0
+            time: 0,
+            stop: false
         });
         this.startTime = new Date().getTime();
 
@@ -50,6 +61,9 @@ class Main extends Component {
     }
 
     stop() {
+        this.setState({
+            stop: true
+        });
         clearInterval(this.timer);
         this.timer = null;
         this.log.record({
@@ -57,10 +71,6 @@ class Main extends Component {
             timestamp: new Date().getTime(),
             moves: (this.state.turn + 1),
             time: this.state.time
-        });
-        var finishEvent = this.finishEvent;
-        if (finishEvent.length > 0) finishEvent.forEach(function(fn) {
-            fn();
         });
     }
 
